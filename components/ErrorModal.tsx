@@ -6,6 +6,7 @@ import React from 'react';
 import {XMarkIcon} from './icons';
 
 interface ErrorModalProps {
+  title: string;
   message: string[];
   onClose: () => void;
   onSelectKey: () => void;
@@ -16,6 +17,7 @@ interface ErrorModalProps {
  * It includes a title, the error message, a close button, and a visual error icon.
  */
 export const ErrorModal: React.FC<ErrorModalProps> = ({
+  title,
   message,
   onClose,
   onSelectKey,
@@ -55,20 +57,22 @@ export const ErrorModal: React.FC<ErrorModalProps> = ({
         <h2
           id="error-modal-title"
           className="text-xl font-bold text-white mb-2">
-          Generation Failed
+          {title}
         </h2>
-        {message.map((m) => (
-          <p className="text-gray-400">{m}</p>
+        {message.map((m, i) => (
+          <p key={i} className="text-gray-400">
+            {m}
+          </p>
         ))}
         <div className="mt-8 flex justify-center gap-4">
           <button
             onClick={onSelectKey}
             className="px-8 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800">
-            Add API Key
+            Select API Key
           </button>
           <button
             onClick={onClose}
-            className="px-8 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800">
+            className="px-8 py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-white font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800">
             Close
           </button>
         </div>
